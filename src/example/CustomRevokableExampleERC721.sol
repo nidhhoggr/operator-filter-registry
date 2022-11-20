@@ -7,7 +7,7 @@ import {CustomRevokableOperatorFilterer} from "../custom/CustomRevokableOperator
 import {Ownable} from "openzeppelin-contracts/access/Ownable.sol";
 
 /**
- * @title  RevokableExampleERC721
+ * @title  CustomRevokableExampleERC721
  * @notice This example contract is configured to use the CustomRevokableOperatorFilterer, which automatically
  *         registers the token and subscribes it to a custom curated filters. The owner of the contract can
  *         permanently revoke checks to the filter registry by calling revokeOperatorFilterRegistry.

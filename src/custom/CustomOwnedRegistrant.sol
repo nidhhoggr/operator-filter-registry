@@ -11,8 +11,7 @@ import {Ownable2Step} from "openzeppelin-contracts/access/Ownable2Step.sol";
  */
 contract CustomOwnedRegistrant is Ownable2Step {
 
-    constructor(address registry, address _owner) {
+    constructor(address registry) {
         IOperatorFilterRegistry(registry).register(address(this));
-        transferOwnership(_owner);
     }
 }
