@@ -10,7 +10,7 @@ import {CustomOperatorFilterer} from "./CustomOperatorFilterer.sol";
  *         As implemented, this abstract contract allows the contract owner to toggle the
  *         isOperatorFilterRegistryRevoked flag in order to permanently bypass the OperatorFilterRegistry checks.
  */
-abstract contract RevokableOperatorFilterer is CustomOperatorFilterer {
+abstract contract CustomRevokableOperatorFilterer is CustomOperatorFilterer {
     error OnlyOwner();
     error AlreadyRevoked();
 
