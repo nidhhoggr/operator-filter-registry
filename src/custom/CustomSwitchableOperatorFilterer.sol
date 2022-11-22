@@ -13,7 +13,7 @@ import {CustomOperatorFilterer} from "./CustomOperatorFilterer.sol";
 abstract contract CustomSwitchableOperatorFilterer is CustomOperatorFilterer {
     error OnlyOwner();
 
-    bool private _isOperatorFilterRegistryEnabled;
+    bool private _isOperatorFilterRegistryEnabled = true;
 
     modifier onlyAllowedOperator(address from) override {
         // Check registry code length to facilitate testing in environments without a deployed registry.
