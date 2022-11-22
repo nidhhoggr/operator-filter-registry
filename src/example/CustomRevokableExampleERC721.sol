@@ -17,9 +17,9 @@ import {Ownable} from "openzeppelin-contracts/access/Ownable.sol";
  */
 abstract contract CustomRevokableExampleERC721 is ERC721("Example", "EXAMPLE"), CustomRevokableOperatorFilterer, Ownable {
     
-    address public currentOperatorFiltererRegistry = address(0x000000000000AAeB6D7670E522A718067333cd4E);
+    address public currentOperatorFiltererRegistry = 0x000000000000AAeB6D7670E522A718067333cd4E;
 
-    address public currentOperatorFiltererSubscriber = address(0x3cc6CddA760b79bAfa08dF41ECFA224f810dCeB6);
+    address public currentOperatorFiltererSubscriber = 0x3cc6CddA760b79bAfa08dF41ECFA224f810dCeB6;
 
     function setOperatorFiltererRegistry(address _registry, address _registrant, bool subscribe) public onlyOwner {
         OPERATOR_FILTER_REGISTRY.unregister(address(this));
