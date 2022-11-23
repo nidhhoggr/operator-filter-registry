@@ -11,7 +11,9 @@ import {OperatorFilterer} from "./../OperatorFilterer.sol";
  *         - `onlyAllowedOperator` modifier for `transferFrom` and `safeTransferFrom` methods.
  *         - `onlyAllowedOperatorApproval` modifier for `approve` and `setApprovalForAll` methods.
  */
-abstract contract CustomRegistryOperatorFilterer is OperatorFilterer {
+abstract contract CustomRegistryOperatorFilterer {
+
+    error OperatorNotAllowed(address operator);
 
     IOperatorFilterRegistry public operatorFilterRegistry;
 
@@ -33,7 +35,22 @@ abstract contract CustomRegistryOperatorFilterer is OperatorFilterer {
         }
     }
 
-    function _checkFilterOperator(address operator) internal view override virtual {
+    modifier onlyAllowedOperator(address from) virtual {
+        // Allow spending tokens from addresses with balance
+        // Note that this still allows listings and marketplaces with escrow to transfer tokens if transferred
+        // from an EOA.
+        if (from != msg.sender) {
+            _checkFilterOperator(msg.sender);
+        }
+        _;
+    }
+
+    modifier onlyAllowedOperatorApproval(address operator) virtual {
+        _checkFilterOperator(operator);
+        _;
+    }
+    
+    function _checkFilterOperator(address operator) internal view virtual {
         // Check registry code length to facilitate testing in environments without a deployed registry.
         if (address(operatorFilterRegistry).code.length > 0) {
             if (!operatorFilterRegistry.isOperatorAllowed(address(this), operator)) {
